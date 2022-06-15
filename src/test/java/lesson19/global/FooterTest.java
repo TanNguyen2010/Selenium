@@ -1,20 +1,9 @@
 package lesson19.global;
 
 import lesson16.DriverFactory;
-import models.components.global.footer.FooterComponent;
-import models.components.global.footer.InformationColumnComponent;
-import models.components.global.header.TopMenuComponent;
-import static models.components.global.header.TopMenuComponent.MainCatItem;
-import static models.components.global.header.TopMenuComponent.CatItemComponent;
-import models.pages.HomePage;
+import lesson20.test_flows.global.FooterTestFlow;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
-
-import java.security.SecureRandom;
-import java.time.Duration;
-import java.util.List;
 
 public class FooterTest {
 
@@ -24,7 +13,10 @@ public class FooterTest {
         WebDriver driver = DriverFactory.getChromeDriver();
         try {
             driver.get("http://demowebshop.tricentis.com/");
-            HomePage homePage = new HomePage(driver);
+            FooterTestFlow footerTestFlow = new FooterTestFlow(driver);
+            footerTestFlow.verifyFooterComp();
+
+            /*HomePage homePage = new HomePage(driver);
             FooterComponent footerComponent = homePage.footerComp();
 
             InformationColumnComponent informationColumnComponent = footerComponent.informationColumnComp();
@@ -37,12 +29,25 @@ public class FooterTest {
                 System.out.println("\t-->" + link.getAttribute("href"));
             });
 
-
-
 //            System.out.println(footerComponent.informationColumnComp().headerElem().getText());
             System.out.println(footerComponent.customerColumnComp().headerElem().getText());
             System.out.println(footerComponent.myAccountColumnComp().headerElem().getText());
-            System.out.println(footerComponent.followUsColumnComp().headerElem().getText());
+            System.out.println(footerComponent.followUsColumnComp().headerElem().getText());*/
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            driver.quit();
+        }
+    }
+
+    @Test
+    public void testFooterRegisterPage() {
+        WebDriver driver = DriverFactory.getChromeDriver();
+        try {
+            driver.get("http://demowebshop.tricentis.com/register");
+            FooterTestFlow footerTestFlow = new FooterTestFlow(driver);
+            footerTestFlow.verifyFooterComp();
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -58,7 +63,8 @@ public class FooterTest {
         WebDriver driver = DriverFactory.getChromeDriver();
         try {
             driver.get("http://demowebshop.tricentis.com/");
-            HomePage homePage = new HomePage(driver);
+
+            /*HomePage homePage = new HomePage(driver);
             TopMenuComponent topMenuComponent = homePage.topMenuComp();
 
             List<MainCatItem> mainItemElem = topMenuComponent.mainItemElem();
@@ -82,9 +88,12 @@ public class FooterTest {
 
 //            Thread.sleep(2000);
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-            wait.until(ExpectedConditions.urlContains(randomCatHref));
+            wait.until(ExpectedConditions.urlContains(randomCatHref));*/
 
-            homePage = new HomePage(driver);
+            FooterTestFlow footerTestFlow = new FooterTestFlow(driver);
+            footerTestFlow.verifyProductCatFooterComponent();
+
+            /*homePage = new HomePage(driver);
             FooterComponent footerComponent = homePage.footerComp();
             InformationColumnComponent informationColumnComponent = footerComponent.informationColumnComp();
             System.out.println(informationColumnComponent.headerElem().getText());
@@ -94,7 +103,7 @@ public class FooterTest {
             informationColumnComponent.linkElems().forEach(link ->{
                 System.out.println("\t-->" + link.getText());
                 System.out.println("\t-->" + link.getAttribute("href"));
-            });
+            });*/
 
         } catch (Exception e) {
             e.printStackTrace();
