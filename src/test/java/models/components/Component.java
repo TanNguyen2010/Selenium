@@ -23,6 +23,10 @@ public class Component {
         this.component = component;
         wait = new WebDriverWait(driver, Duration.ofSeconds(15));
     }
+    public WebElement getComponent(){
+        return component;
+    }
+
     public WebElement findElement(By by){
         return component.findElement(by);
     }
@@ -49,9 +53,10 @@ public class Component {
         }catch (Exception e){
             throw new IllegalArgumentException("[ERR]The component must have css Selector!");
         }
-        List<WebElement> results = wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.cssSelector(cssSelector)));
+        wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.cssSelector(cssSelector)));
+        List<WebElement> results = component.findElements(By.cssSelector(cssSelector));
 
-        List<T> components = results.stream().map(webElement -> {
+                List<T> components = results.stream().map(webElement -> {
             try {
                 return constructor.newInstance(driver,webElement);
             }catch (Exception e){
